@@ -8,6 +8,7 @@ import { HelloModule } from './hello/hello.module.js';
 import { UsersModule } from './users/users.module.js';
 import { ConversationsModule } from './conversations/conversations.module.js';
 import { MessagesModule } from './messages/messages.module.js';
+import { AiModule } from './ai/ai.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -26,6 +27,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     UsersModule,
     ConversationsModule,
     MessagesModule,
+    AiModule,
   ],
   controllers: [AppController],
   providers: [AppService],

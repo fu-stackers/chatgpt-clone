@@ -11,4 +11,4 @@ async function bootstrap() {
 }
 await bootstrap();
 
-console.log('hi fuad pis news');
+
