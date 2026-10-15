@@ -18,6 +18,7 @@ export class MessagesService {
     conversationId: number,
     role: 'user' | 'assistant',
     content: string,
+    totalCount=0,
   ) {
     await this.ensureConversationExists(conversationId);
 

@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module.js';
 import { ConversationsModule } from './conversations/conversations.module.js';
 import { MessagesModule } from './messages/messages.module.js';
 import { AiModule } from './ai/ai.module.js';
+import { ChatModule } from './chat/chat.module.js';
 
 export const { ObserveModule, ObserveInstrument } = createObserveModule();
 
@@ -28,6 +29,7 @@ export const { ObserveModule, ObserveInstrument } = createObserveModule();
     ConversationsModule,
     MessagesModule,
     AiModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
