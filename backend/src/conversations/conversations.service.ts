@@ -11,11 +11,8 @@ export class ConversationsService {
   })
  }
 
-findAllByUser(userId:number){
-  return this.prisma.conversation.findMany({
-    where:{userId},
-    orderBy:{createdAt:'desc'}
-  })
+findAllByUser(){
+  return this.prisma.conversation.findMany();
 }
 
 findOne(id: number) {

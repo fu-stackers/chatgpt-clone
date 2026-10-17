@@ -1,15 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#8b5cf6"/>
-      <stop offset="1" stop-color="#ec4899"/>
-    </linearGradient>
-  </defs>
-  <path d="M32 20H96A16 16 0 0 1 112 36V76A16 16 0 0 1 96 92H56L36 110V92H32A16 16 0 0 1 16 76V36A16 16 0 0 1 32 20Z" fill="url(#g)"/>
-  <circle cx="48" cy="52" r="7" fill="#fff"/>
-  <circle cx="80" cy="52" r="7" fill="#fff"/>
-  <circle cx="50" cy="53" r="3" fill="#1e1b4b"/>
-  <circle cx="82" cy="53" r="3" fill="#1e1b4b"/>
-  <path d="M46 70Q64 84 82 70" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none"/>
-  <path d="M104 14l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#fde68a"/>
+<svg viewBox="0 0 169 144" width="169" height="144" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nuzz">
+  <path d="M0.714962 83.3543C0.840426 45.5121 -13.983 -22.7507 118.127 7.90049C175.458 -5.07371 167.355 92.9404 167.355 112.242C167.355 134.085 153.968 146.206 107.816 142.207C98.4821 141.399 88.7431 140.526 79.2468 140.494C39.1966 140.36 0.589498 121.196 0.714962 83.3543Z" fill="#57c564" />
+  <rect x="39.4727" y="31.5664" width="34.0239" height="76.5537" rx="17.0119" fill="#FFFFFF" />
+  <rect x="94.5742" y="31.5664" width="34.0239" height="76.5537" rx="17.0119" fill="#FFFFFF" />
 </svg>
