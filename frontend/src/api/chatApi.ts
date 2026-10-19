@@ -9,6 +9,15 @@ export async function fetchConversation(id: number): Promise<Conversation> {
 
   return res.json();
 }
+export async function fetchConversationTitle(
+  userId: number,
+): Promise<Conversation[]> {
+  const res = await fetch(`${API}/conversations/users/${userId}`);
+  if (!res.ok)
+    throw new Error("could not load the chat . check your connection");
+  const data: Conversation[] = await res.json();
+  return data;
+}
 
 export async function sendChatMessage(
   id: number,
@@ -19,8 +28,10 @@ export async function sendChatMessage(
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ content }),
   });
- if (!res.ok) {
-    throw new Error('Chatty is busy right now. Check your connection and try again in a moment.');
+  if (!res.ok) {
+    throw new Error(
+      "Chatty is busy right now. Check your connection and try again in a moment.",
+    );
   }
   return res.json();
 }
