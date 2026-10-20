@@ -24,11 +24,11 @@ const itemClass =
 export default function Sidebar() {
   const [size, setSize] = useState(true);
   const [recentsize, setRecentSize] = useState(true);
-  const { conversations } = useConversations(2);
+  const { conversations } = useConversations(1);
 
   return (
     <div
-      className={`flex flex-col pt-4 w-[25%] gap-4 ${size ? "pl-16" : "pl-36 transition duration-100"}`}
+      className={`flex flex-col pt-4 w-[20%] gap-4 ${size ? "pl-16" : "pl-36 transition duration-100"}`}
     >
       <div className="flex flex-col gap-3">
         <div
@@ -85,9 +85,7 @@ export default function Sidebar() {
         className={`flex flex-col min-h-0 flex-1 gap-4 overflow-y-auto ${size ? "" : "hidden transition duration-500"}`}
       >
         <div className="flex cursor-pointer items-center gap-1">
-          <h3 className="mb-1 text-xs font-medium uppercase text-muted">
-            Recents
-          </h3>
+          <h3 className="mb-1 text-xs font-medium  text-muted">Recents</h3>
           <ChevronDown
             size={16}
             onClick={() => setRecentSize((prev) => !prev)}
@@ -114,7 +112,7 @@ export default function Sidebar() {
         </div>
       </div>
 
-      <div className={`fixed bottom-4 ${size ? "" : ""}`}>
+      <div className="mt-auto border-t border-border-light px-2 pt-3 dark:border-dark-border-bg">
         <div className="cursor-pointer">
           <h1>profile</h1>
         </div>

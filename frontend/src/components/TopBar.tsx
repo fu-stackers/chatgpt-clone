@@ -6,7 +6,6 @@ import { Moon } from "lucide-react";
 function TopBar() {
   const { theme, ToggleTheme } = useTheme();
   return (
-    
     <div className="flex border  border-border-light dark:border-dark-border-bg border-t-3 border-b-6 bg-box dark:bg-dark-bg-box gap-6 px-4 py-3 h-fit rounded-3xl mt-4 items-center mr-23">
       <Search className="cursor-pointer" size={20} />
       <PlusCircle className="cursor-pointer" size={20} />

@@ -1,22 +1,34 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-
-// const API = "http://localhost:3000";
-// const CONVERSATION_ID = 1;
-
 import TopBar from "./components/TopBar";
-// import useTheme from "./hooks/useTheme";
 import Sidebar from "./components/Sidebar";
-// import MessageBubble from './components/MessageBubble';
+import ChatInput from "./components/ChatInput";
 function App() {
-  // const theme=useTheme();
-  // console.log(useTheme());
+  function handleSend(text: string) {
+    // The backend connection comes in the next step
+    console.log("send:", text);
+  }
   return (
-    <div className="bg-box-light   dark:text-text-dark dark:bg-dark-bg  text-text-light  h-dvh">
-      <div className="flex justify-between">
-        <Sidebar />
-        <TopBar />
-      </div>
+    <div className="flex h-dvh bg-light-bg text-text-light dark:bg-dark-bg dark:text-text-dark">
+      <Sidebar />
+      <main className="flex flex-1 flex-col">
+        <div className="justify-end flex ">
+          <TopBar />
+        </div>
+
+        <div className="flex flex-1 flex-col items-center justify-center px-6">
+          <h1 className="text-4xl font-semibold">Hello</h1>
+          <p className="mt-2 text-lg text-text-light/70 dark:text-text-dark/70">
+            How can I help you today?
+          </p>
+        </div> 
+
+        <div className="mx-auto w-full max-w-3xl px-4 pb-10">
+          <ChatInput onSend={handleSend} />
+        </div>
+
+
+      </main>
     </div>
   );
 }
