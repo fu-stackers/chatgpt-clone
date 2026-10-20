@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchConversation, sendChatMessage } from '../api/chatApi';
+import { fetchConversations, sendChatMessage } from '../api/chatApi';
 import type { Message } from '../types/chat';
 
 export function useChat(conversationId: number) {
@@ -10,7 +10,7 @@ export function useChat(conversationId: number) {
   // Load the saved chat whenever the conversation changes
   useEffect(() => {
     setError('');
-    fetchConversation(conversationId)
+    fetchConversations(conversationId)
       .then((c) => setMessages(c.messages))
       .catch((err: Error) => setError(err.message));
   }, [conversationId]);

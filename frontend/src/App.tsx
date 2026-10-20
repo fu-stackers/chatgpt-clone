@@ -12,7 +12,7 @@ function App() {
   // const theme=useTheme();
   // console.log(useTheme());
   return (
-    <div className="bg-light-bg dark:text-text-dark dark:bg-dark-bg  text-text-light  h-dvh">
+    <div className="bg-box-light   dark:text-text-dark dark:bg-dark-bg  text-text-light  h-dvh">
       <div className="flex justify-between">
         <Sidebar />
         <TopBar />

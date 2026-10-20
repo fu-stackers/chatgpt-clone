@@ -2,11 +2,9 @@ import type { ChatResponse, Conversation } from "./../types/chat";
 
 const API = "http://localhost:3000";
 
-export async function fetchConversation(id: number): Promise<Conversation> {
-  const res = await fetch(`${API}/conversations/${id}`);
-  if (!res.ok)
-    throw new Error("could not load the chat . check your connection");
-
+export async function fetchConversations(userId: number): Promise<Conversation[]> {
+  const res = await fetch(`${API}/conversations/users/${userId}`);
+  if (!res.ok) throw new Error("Could not load your chats.");
   return res.json();
 }
 export async function fetchConversationTitle(

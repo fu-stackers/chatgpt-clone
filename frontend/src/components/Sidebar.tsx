@@ -1,56 +1,42 @@
-import React, { useEffect, useState } from "react";
-import reallogo from "../../public/reallogo.svg";
+import { useState } from "react";
 import {
   ChevronDown,
+  ChevronLeft,
   Search,
   Images,
   MessageCirclePlus,
   Clock,
   GraduationCap,
-  ChevronRight,
-  ChevronLeft,
 } from "lucide-react";
-import { fetchConversation, fetchConversationTitle } from "../api/chatApi";
-import type { Conversation } from "../types/chat";
+import { useConversations } from "../hooks/useConversations";
 
-function Sidebar() {
-  const [size, setSize] = useState<boolean>(true);
-  const [recentsize, setRecentSize] = useState<boolean>(true);
-  const [conversationTitle, setconversationTitle] = useState<Conversation[]>(
-    [],
-  );
+const navItems = [
+  { icon: MessageCirclePlus, label: "New Chat" },
+  { icon: Search, label: "Search" },
+  { icon: Images, label: "Images" },
+  { icon: Clock, label: "Scheduled" },
+  { icon: GraduationCap, label: "Students" },
+];
 
-  function Toggle() {
-    setSize((previes) => !previes);
-  }
-  function ToggleRecent() {
-    setRecentSize((prev) => !prev);
-  }
-  useEffect(() => {
-    fetchConversationTitle(1)
-      .then((data) => {
-        (console.log(data), setconversationTitle(data));
-      })
-      .catch((error) => console.log(error));
-  }, []);
+const itemClass =
+  "flex items-center gap-2 cursor-pointer rounded-[20px] px-2 py-2 text-sm transition duration-200 hover:bg-border-light dark:hover:bg-dark-border-bg";
 
-  function formatTitle(title: string): string {
-    if (title.length > 30) {
-      return title.slice(0, 30) + "...";
-    }
-    return title;
-  }
+export default function Sidebar() {
+  const [size, setSize] = useState(true);
+  const [recentsize, setRecentSize] = useState(true);
+  const { conversations } = useConversations(2);
+
   return (
     <div
-      className={`flex flex-col   pt-4 w-[25%] gap-4 ${size ? "pl-26" : "pl-36 transition duration-100x00"} `}
+      className={`flex flex-col pt-4 w-[25%] gap-4 ${size ? "pl-16" : "pl-36 transition duration-100"}`}
     >
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-3">
         <div
-          className={`${size ? "flex items-center gap-4" : "flex flex-col  gap-4"}`}
+          className={size ? "flex items-center gap-4" : "flex flex-col gap-4"}
         >
-          <div className="flex text-center gap-1">
+          <div className="flex gap-1">
             <img
-              src={reallogo}
+              src="/reallogo.svg"
               className="h-8 w-8 cursor-pointer"
               alt="logo-items"
             />
@@ -60,68 +46,74 @@ function Sidebar() {
               nuzz ai
             </h2>
           </div>
-          <ChevronLeft
-            size={16}
-            onClick={Toggle}
-            className={`${size ? "" : "rotate-180 transition duration-300"}`}
-          />
+          <button
+            onClick={() => setSize((prev) => !prev)}
+            aria-label={size ? "Collapse sidebar" : "Expand sidebar"}
+            className="grid h-8 w-8 cursor-pointer place-items-center rounded-full border border-transparent transition duration-200  hover:bg-border-light dark:hover:bg-dark-border-bg"
+          >
+            <ChevronLeft
+              size={16}
+              className={size ? "" : "rotate-180 transition duration-300"}
+            />
+          </button>
         </div>
-        <div className="flex items-center gap-2 cursor-pointer ">
-          <MessageCirclePlus size={24} />
-          <h6
-            className={`text-1xl font-sans  font-medium cursor-pointer  ${size ? "" : "hidden transition duration-500"}  `}
+        {navItems.map(({ icon: Icon, label }) => (
+          <div
+            key={label}
+            className={`group relative flex cursor-pointer items-center gap-2 rounded-[20px] px-2 py-2 text-sm transition-all duration-300 ease-out hover:bg-border-light dark:hover:bg-dark-border-bg ${size ? "w-36" : "w-10"}`}
           >
-            New Chat
-          </h6>
-        </div>{" "}
-        <div className="flex items-center gap-2 cursor-pointer">
-          <Search size={24} />
-          <p
-            className={`text-1xl font-sans cursor-pointer  font-medium  ${size ? "" : "hidden transition duration-500"}`}
-          >
-            Search
-          </p>
-        </div>
-        <div className="flex items-center cursor-pointer gap-2">
-          <Images size={24} />
-          <p
-            className={`text-1xl font-sans cursor-pointer  font-medium  ${size ? "" : "hidden transition duration-500"}`}
-          >
-            Images
-          </p>
-        </div>
-        <div className="flex items-center cursor-pointer gap-2">
-          <Clock />
-          <p
-            className={`text-1xl font-sans cursor-pointer  font-medium  ${size ? "" : "hidden transition duration-500"}`}
-          >
-            Scheduled
-          </p>
-        </div>{" "}
-        <div className="flex items-center cursor-pointer gap-2">
-          <GraduationCap />
-          <p
-            className={`text-1xl font-sans cursor-pointer  font-medium  ${size ? "" : "hidden transition duration-500"}`}
-          >
-            Students
-          </p>
-        </div>
+            <Icon size={24} className="shrink-0" />
+            <p
+              className={`overflow-hidden whitespace-nowrap font-sans font-medium transition-all duration-300 ease-out ${
+                size
+                  ? "max-w-40 translate-x-0 opacity-100"
+                  : "max-w-0 -translate-x-3 opacity-0"
+              }`}
+            >
+              {label}
+            </p>
+
+            {!size && (
+              <span className="pointer-events-none invisible absolute left-full top-1/2 z-50 ml-3 -translate-y-1/2 whitespace-nowrap rounded-lg bg-dark-bg px-3 py-1.5 text-sm text-light-bg opacity-0 shadow-md transition duration-200 group-hover:visible group-hover:opacity-100 dark:bg-box-light dark:text-text-light">
+                {label}
+              </span>
+            )}
+          </div>
+        ))}
       </div>
       <div
-        className={`flex flex-col cursor-pointer gap-4 ${size ? "" : "hidden transition duration-500"} `}
+        className={`flex flex-col min-h-0 flex-1 gap-4 overflow-y-auto ${size ? "" : "hidden transition duration-500"}`}
       >
-        <div className="flex cursor-pointer  items-center gap-1 ">
-          <h3>Recents</h3>
-          <ChevronDown size={16} onClick={ToggleRecent} />
+        <div className="flex cursor-pointer items-center gap-1">
+          <h3 className="mb-1 text-xs font-medium uppercase text-muted">
+            Recents
+          </h3>
+          <ChevronDown
+            size={16}
+            onClick={() => setRecentSize((prev) => !prev)}
+            className={`cursor-pointer transition-transform duration-300 ${recentsize ? "" : "-rotate-90"}`}
+          />
         </div>
+
         <div
-          className={`flex-1 gap-3 overflow-y-auto scroll-auto ${recentsize ? "visible" : "hidden"}`}
+          className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+            recentsize
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0"
+          }`}
         >
-          {conversationTitle.map((item) => (
-            <p>{formatTitle(item.title)}</p>
-          ))}
+          <div className="min-h-0 overflow-hidden">
+            <div className="flex flex-col gap-2">
+              {conversations.map((item) => (
+                <p key={item.id} className={`${itemClass} items-center`}>
+                  {item.title}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
+
       <div className={`fixed bottom-4 ${size ? "" : ""}`}>
         <div className="cursor-pointer">
           <h1>profile</h1>
@@ -130,5 +122,3 @@ function Sidebar() {
     </div>
   );
 }
-
-export default Sidebar;

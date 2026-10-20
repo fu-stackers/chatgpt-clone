@@ -28,7 +28,7 @@ export class ConversationsController {
     return this.conversationsService.findOne(Number(id));
   }
   @Get('users/:userId')
-  findByUser(@Param('userId') userId: string) {
+  findByUser(@Param('userId') @Query('users') userId: string) {
     return this.conversationsService.findByUser(Number(userId));
   }
   @Delete('delete/:id')
